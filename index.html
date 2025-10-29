@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Village Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="brand" aria-label="Village Market home">
+                <span class="brand-icon" aria-hidden="true">🌾</span>
+                <span class="brand-text">Village Market</span>
+            </a>
+
+            <nav class="nav" aria-label="Primary">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul id="nav-menu" class="nav-menu">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#products">Shop</a></li>
+                    <li><a href="#infrastructure">Infrastructure</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#community">Community</a></li>
+                    <li><a href="#ugc">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-actions">
+                <button class="auth-button" id="login-btn" aria-label="Login">Login</button>
+                <button class="auth-button" id="register-btn" aria-label="Register">Register</button>
+                <div class="user-profile" id="user-profile" style="display: none;">
+                    <button class="profile-button" id="profile-btn" aria-label="User Profile">
+                        <span class="profile-icon" aria-hidden="true">👤</span>
+                        <span class="username" id="username"></span>
+                    </button>
+                </div>
+            </div>
+
+            <button class="cart-button" aria-label="Open cart" data-open-cart>
+                <span class="cart-icon" aria-hidden="true">🧺</span>
+                <span class="cart-count" aria-live="polite" aria-atomic="true">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+            <div class="container">
+                <ol>
+                    <li><a href="#">Home</a></li>
+                    <li aria-current="page">Village Market</li>
+                </ol>
+            </div>
+        </nav>
+        
+        <section id="hero" class="hero section">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <h1 class="display">Fresh from our village to your door</h1>
+                    <p>Organic produce, handmade crafts, and wholesome staples from local farmers and artisans.</p>
+                    <div class="hero-cta">
+                        <a href="#products" class="btn btn-primary">Shop now</a>
+                        <a href="#about" class="btn btn-outline">Learn more</a>
+                    </div>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="sun"></div>
+                    <div class="hill hill-1"></div>
+                    <div class="hill hill-2"></div>
+                    <div class="windmill">
+                        <div class="tower"></div>
+                        <div class="blades">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Featured products</h2>
+                    <div class="search-container">
+                        <input type="text" id="product-search" placeholder="Search products..." class="search-input" aria-label="Search products" autocomplete="off">
+                        <button class="search-btn" aria-label="Search">🔍</button>
+                        <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
+                    </div>
+                </div>
+                <div class="filters-container">
+                    <div class="filters" role="group" aria-label="Product filters">
+                        <button class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+                        <button class="chip" data-filter="produce" aria-pressed="false">Produce</button>
+                        <button class="chip" data-filter="crafts" aria-pressed="false">Crafts</button>
+                        <button class="chip" data-filter="staples" aria-pressed="false">Staples</button>
+                    </div>
+                    <div class="sort-options" role="group" aria-label="Sort products">
+                        <label for="sort-products" class="sr-only">Sort products by</label>
+                        <select id="sort-products" class="sort-select">
+                            <option value="default">Sort by: Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                            <option value="rating">Top Rated</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="advanced-filters">
+                    <div class="price-filter">
+                        <label for="min-price">Price Range:</label>
+                        <div class="price-inputs">
+                            <input type="number" id="min-price" placeholder="Min" class="price-input" aria-label="Minimum price">
+                            <span>-</span>
+                            <input type="number" id="max-price" placeholder="Max" class="price-input" aria-label="Maximum price">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="product-grid" aria-live="polite" aria-busy="false">
+                    <!-- Cards injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about section">
+            <div class="container about-inner">
+                <div class="about-illustration" aria-hidden="true">
+                    <div class="river"></div>
+                    <div class="tree"></div>
+                    <div class="boat"></div>
+                </div>
+                <div class="about-copy">
+                    <h2>Rooted in community</h2>
+                    <p>We connect smallholders and craftspeople with neighbors near and far. Every purchase supports rural livelihoods and preserves traditional skills.</p>
+                    <p>Founded in 2023 by a group of passionate individuals from Campus Hub, Village Market emerged from a desire to create sustainable economic opportunities for rural communities. We believe in the power of technology to bridge the gap between traditional craftsmanship and modern consumer needs.</p>
+                    <p>Our platform showcases the finest organic produce, handmade crafts, and wholesome staples directly from local farmers and artisans. By eliminating middlemen, we ensure fair prices for producers while offering quality products to consumers.</p>
+                    <ul class="feature-list">
+                        <li><span class="ico">🚜</span> Direct from farmers</li>
+                        <li><span class="ico">🌿</span> Organic, seasonal, sustainable</li>
+                        <li><span class="ico">👐</span> Fair prices, real impact</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="infrastructure" class="infrastructure section">
+            <div class="container">
+                <h2>Infrastructure Development</h2>
+                <p class="muted">Improving living standards and accessibility in our village.</p>
+                <div class="infra-grid" role="region" aria-label="Infrastructure Development Projects">
+                    <article class="infra-card" data-feature="roads" tabindex="0" role="button" aria-label="View details for Roads & Drainage project">
+                        <div class="infra-ico drive" aria-hidden="true">🛣️</div>
+                        <h3>Roads & Drainage</h3>
+                        <p>Build or repair village roads to ensure all-season connectivity. Install proper culverts and drainage systems to prevent flooding during monsoons and protect homes and farmland from water damage.</p>
+                    </article>
+                    <article class="infra-card" data-feature="electricity" tabindex="0" role="button" aria-label="View details for Electricity & Lighting project">
+                        <div class="infra-ico sunpulse" aria-hidden="true">🔆</div>
+                        <h3>Electricity & Lighting</h3>
+                        <p>Introduce solar streetlights for safer nighttime travel and small-scale renewable energy grids to power homes, schools, and community centers, enabling modern conveniences and extended productive hours.</p>
+                    </article>
+                    <article class="infra-card" data-feature="water" tabindex="0" role="button" aria-label="View details for Water Supply project">
+                        <div class="infra-ico drop" aria-hidden="true">💧</div>
+                        <h3>Water Supply</h3>
+                        <p>Develop borewells for consistent groundwater access, implement rainwater harvesting systems to capture monsoon rains, and establish water purification systems for clean drinking water for all families.</p>
+                    </article>
+                    <article class="infra-card" data-feature="sanitation" tabindex="0" role="button" aria-label="View details for Sanitation project">
+                        <div class="infra-ico recycle" aria-hidden="true">🚮</div>
+                        <h3>Sanitation</h3>
+                        <p>Build public and household toilets to improve hygiene, establish waste segregation systems at source, and create community compost pits to convert organic waste into valuable fertilizer for agriculture.</p>
+                    </article>
+                </div>
+                
+                <!-- Detailed Infrastructure Information Modals -->
+                <div class="infra-details-container">
+                    <!-- Roads & Drainage Details -->
+                    <div class="infra-detail" id="roads-detail" style="display: none;">
+                        <div class="detail-header">
+                            <h3>Roads & Drainage</h3>
+                            <button class="close-detail" data-close-detail aria-label="Close">&times;</button>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-image">
+                                <div class="placeholder-img">🛣️</div>
+                            </div>
+                            <div class="detail-text">
+                                <h4>Project Overview</h4>
+                                <p>Our roads and drainage project aims to transform village connectivity and prevent seasonal flooding that damages crops and homes.</p>
+                                
+                                <h4>Key Components</h4>
+                                <ul>
+                                    <li>Construction of 15 km of all-weather roads connecting all households</li>
+                                    <li>Installation of 50 culverts for proper water flow</li>
+                                    <li>Drainage systems along main roads to prevent waterlogging</li>
+                                    <li>Bridge construction over seasonal streams</li>
+                                    <li>Road maintenance program with community participation</li>
+                                </ul>
+                                
+                                <h4>Benefits</h4>
+                                <ul>
+                                    <li>Year-round access to markets, schools, and healthcare</li>
+                                    <li>Reduced crop loss due to flooding</li>
+                                    <li>Improved emergency response times</li>
+                                    <li>Enhanced property values</li>
+                                    <li>Better access for agricultural equipment</li>
+                                </ul>
+                                
+                                <h4>Progress</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%;"></div>
+                                </div>
+                                <p>65% completed - 10 km of roads finished</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Electricity & Lighting Details -->
+                    <div class="infra-detail" id="electricity-detail" style="display: none;">
+                        <div class="detail-header">
+                            <h3>Electricity & Lighting</h3>
+                            <button class="close-detail" data-close-detail aria-label="Close">&times;</button>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-image">
+                                <div class="placeholder-img">🔆</div>
+                            </div>
+                            <div class="detail-text">
+                                <h4>Project Overview</h4>
+                                <p>Bringing reliable electricity to every household through a combination of solar power and grid connectivity.</p>
+                                
+                                <h4>Key Components</h4>
+                                <ul>
+                                    <li>Installation of 200 solar streetlights throughout the village</li>
+                                    <li>Solar panels for 150 households with battery backup</li>
+                                    <li>Connection to the main power grid for commercial areas</li>
+                                    <li>Community charging stations for mobile devices</li>
+                                    <li>Energy-efficient LED bulbs distribution</li>
+                                </ul>
+                                
+                                <h4>Benefits</h4>
+                                <ul>
+                                    <li>Safer travel after sunset for women and children</li>
+                                    <li>Extended productive hours for small businesses</li>
+                                    <li>Better educational opportunities with evening study</li>
+                                    <li>Improved healthcare services with refrigeration</li>
+                                    <li>Reduced kerosene usage and indoor air pollution</li>
+                                </ul>
+                                
+                                <h4>Progress</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 40%;"></div>
+                                </div>
+                                <p>40% completed - 80 streetlights installed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Water Supply Details -->
+                    <div class="infra-detail" id="water-detail" style="display: none;">
+                        <div class="detail-header">
+                            <h3>Water Supply</h3>
+                            <button class="close-detail" data-close-detail aria-label="Close">&times;</button>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-image">
+                                <div class="placeholder-img">💧</div>
+                            </div>
+                            <div class="detail-text">
+                                <h4>Project Overview</h4>
+                                <p>Ensuring clean, reliable water access for all families through multiple sustainable sources.</p>
+                                
+                                <h4>Key Components</h4>
+                                <ul>
+                                    <li>Construction of 5 deep borewells with submersible pumps</li>
+                                    <li>Installation of 50 rainwater harvesting systems</li>
+                                    <li>Water purification units at community collection points</li>
+                                    <li>Pipeline network connecting all households</li>
+                                    <li>Water storage tanks with distribution system</li>
+                                </ul>
+                                
+                                <h4>Benefits</h4>
+                                <ul>
+                                    <li>Reduced time spent collecting water (especially for women)</li>
+                                    <li>Improved health outcomes with clean drinking water</li>
+                                    <li>Better crop irrigation possibilities</li>
+                                    <li>Reduced waterborne diseases</li>
+                                    <li>Increased agricultural productivity</li>
+                                </ul>
+                                
+                                <h4>Progress</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%;"></div>
+                                </div>
+                                <p>75% completed - 4 borewells operational</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sanitation Details -->
+                    <div class="infra-detail" id="sanitation-detail" style="display: none;">
+                        <div class="detail-header">
+                            <h3>Sanitation</h3>
+                            <button class="close-detail" data-close-detail aria-label="Close">&times;</button>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-image">
+                                <div class="placeholder-img">🚮</div>
+                            </div>
+                            <div class="detail-text">
+                                <h4>Project Overview</h4>
+                                <p>Creating a cleaner, healthier village environment through improved sanitation facilities and waste management.</p>
+                                
+                                <h4>Key Components</h4>
+                                <ul>
+                                    <li>Construction of 200 household toilets with septic tanks</li>
+                                    <li>5 public toilet facilities in community areas</li>
+                                    <li>Waste segregation system with color-coded bins</li>
+                                    <li>Community composting pits for organic waste</li>
+                                    <li>Regular waste collection and transportation service</li>
+                                </ul>
+                                
+                                <h4>Benefits</h4>
+                                <ul>
+                                    <li>Improved public health and reduced disease transmission</li>
+                                    <li>Cleaner village environment</li>
+                                    <li>Production of organic fertilizer for farming</li>
+                                    <li>Reduced open defecation</li>
+                                    <li>Enhanced dignity and safety for women</li>
+                                </ul>
+                                
+                                <h4>Progress</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 55%;"></div>
+                                </div>
+                                <p>55% completed - 110 toilets constructed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="team section">
+            <div class="container">
+                <h2>Our Amazing Team</h2>
+                <p class="muted">The passionate individuals driving Village Market's mission</p>
+                <div class="team-grid" role="region" aria-label="Our Team Members">
+                    <article class="team-card" tabindex="0">
+                        <div class="team-img" aria-hidden="true">
+                            <div class="placeholder-icon">👨‍💼</div>
+                        </div>
+                        <h3>Vinayak</h3>
+                        <p class="team-role">Founder, Campus Hub</p>
+                        <p class="team-bio">Visionary leader with a passion for rural development. Vinayak bridges the gap between traditional farming communities and modern e-commerce, ensuring fair value for producers.</p>
+                    </article>
+                    <article class="team-card" tabindex="0">
+                        <div class="team-img" aria-hidden="true">
+                            <div class="placeholder-icon">👨‍🎨</div>
+                        </div>
+                        <h3>Shiven</h3>
+                        <p class="team-role">Co-Founder and Graphics Designer Lead</p>
+                        <p class="team-bio">Creative powerhouse who transforms our brand vision into compelling visual stories. Shiven's designs capture the authentic spirit of rural India while appealing to modern consumers.</p>
+                    </article>
+                    <article class="team-card" tabindex="0">
+                        <div class="team-img" aria-hidden="true">
+                            <div class="placeholder-icon">👨‍💻</div>
+                        </div>
+                        <h3>Saumil</h3>
+                        <p class="team-role">Designer Lead</p>
+                        <p class="team-bio">User experience specialist who ensures our platform is intuitive and accessible to everyone. Saumil's thoughtful designs make online shopping effortless for both tech-savvy and first-time users.</p>
+                    </article>
+                    <article class="team-card" tabindex="0">
+                        <div class="team-img" aria-hidden="true">
+                            <div class="placeholder-icon">👥</div>
+                        </div>
+                        <h3>Sachi and Preet</h3>
+                        <p class="team-role">Social Media Handlers</p>
+                        <p class="team-bio">Our dynamic social media duo who build authentic communities around our brand. They showcase real stories from our producers and engage with customers to create meaningful connections.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section">
+            <div class="container contact-inner">
+                <div class="contact-header">
+                    <h2>Stay in the loop</h2>
+                    <p class="contact-subtitle">Subscribe to our newsletter for updates on new products, special offers, and village development news.</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="subscribe-section">
+                        <h3>Newsletter Subscription</h3>
+                        <form id="subscribe-form" class="subscribe-form" novalidate>
+                            <div class="form-group">
+                                <label for="email" class="sr-only">Email</label>
+                                <div class="input-group">
+                                    <input id="email" name="email" type="email" placeholder="Your email address" required aria-label="Email address">
+                                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                                </div>
+                            </div>
+                            <p class="form-message" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-cards" aria-label="Contact details">
+                        <div class="contact-card">
+                            <div class="contact-icon spin" aria-hidden="true">🏫</div>
+                            <div>
+                                <div class="contact-label">Name</div>
+                                <div class="contact-value">Campus Hub</div>
+                            </div>
+                        </div>
+                        <a class="contact-card" href="mailto:campushub13@gmail.com">
+                            <div class="contact-icon pulse" aria-hidden="true">✉️</div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">campushub13@gmail.com</div>
+                            </div>
+                        </a>
+                        <a class="contact-card" href="tel:+91123456789">
+                            <div class="contact-icon float" aria-hidden="true">📞</div>
+                            <div>
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-value">+91 12345 6789</div>
+                            </div>
+                        </a>
+                        <div class="contact-card">
+                            <div class="contact-icon wave" aria-hidden="true">📍</div>
+                            <div>
+                                <div class="contact-label">Location</div>
+                                <div class="contact-value">Vadodara, Gujarat</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-dashboard" class="admin-dashboard section" style="display: none;">
+            <div class="container">
+                <h2>Admin Dashboard</h2>
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="products">Products</button>
+                    <button class="admin-tab" data-tab="orders">Orders</button>
+                    <button class="admin-tab" data-tab="users">Users</button>
+                    <button class="admin-tab" data-tab="analytics">Analytics</button>
+                </div>
+                
+                <div class="admin-tab-content">
+                    <!-- Products Management -->
+                    <div class="admin-tab-pane active" data-tab-pane="products">
+                        <div class="admin-header">
+                            <h3>Product Management</h3>
+                            <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Stock</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body">
+                                    <!-- Products will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Management -->
+                    <div class="admin-tab-pane" data-tab-pane="orders">
+                        <div class="admin-header">
+                            <h3>Order Management</h3>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-table-body">
+                                    <!-- Orders will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Users Management -->
+                    <div class="admin-tab-pane" data-tab-pane="users">
+                        <div class="admin-header">
+                            <h3>User Management</h3>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <!-- Users will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Analytics -->
+                    <div class="admin-tab-pane" data-tab-pane="analytics">
+                        <div class="admin-header">
+                            <h3>Advanced Analytics Dashboard</h3>
+                            <div class="analytics-controls">
+                                <div class="date-filter">
+                                    <select id="analytics-period">
+                                        <option value="today">Today</option>
+                                        <option value="week" selected>This Week</option>
+                                        <option value="month">This Month</option>
+                                        <option value="quarter">This Quarter</option>
+                                        <option value="year">This Year</option>
+                                        <option value="custom">Custom Range</option>
+                                    </select>
+                                    <div class="custom-date-range" id="custom-date-range" style="display: none;">
+                                        <input type="date" id="start-date" class="date-input">
+                                        <span>to</span>
+                                        <input type="date" id="end-date" class="date-input">
+                                        <button class="btn btn-outline" id="apply-date-range">Apply</button>
+                                    </div>
+                                </div>
+                                <div class="comparison-control">
+                                    <label for="compare-period">Compare with:</label>
+                                    <select id="compare-period">
+                                        <option value="none">No comparison</option>
+                                        <option value="previous">Previous period</option>
+                                        <option value="year">Same period last year</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-outline" id="refresh-analytics" title="Refresh Data">↻</button>
+                                <div class="export-dropdown">
+                                    <button class="btn btn-primary" id="export-analytics">Export Data</button>
+                                    <div class="export-options" id="export-options" style="display: none;">
+                                        <button class="export-option" data-format="csv">Export as CSV</button>
+                                        <button class="export-option" data-format="json">Export as JSON</button>
+                                        <button class="export-option" data-format="pdf">Export as PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Key Metrics -->
+                        <div class="analytics-grid">
+                            <div class="analytics-card">
+                                <h4>Total Revenue</h4>
+                                <p class="analytics-value" id="total-revenue">₹0</p>
+                                <span class="trend-indicator" id="revenue-trend"></span>
+                            </div>
+                            <div class="analytics-card">
+                                <h4>Total Orders</h4>
+                                <p class="analytics-value" id="total-orders">0</p>
+                                <span class="trend-indicator" id="orders-trend"></span>
+                            </div>
+                            <div class="analytics-card">
+                                <h4>Total Products</h4>
+                                <p class="analytics-value" id="total-products">0</p>
+                                <span class="trend-indicator" id="products-trend"></span>
+                            </div>
+                            <div class="analytics-card">
+                                <h4>Total Users</h4>
+                                <p class="analytics-value" id="total-users">0</p>
+                                <span class="trend-indicator" id="users-trend"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Analytics Sections -->
+                        <div class="advanced-analytics">
+                            <!-- Real-time Sales Tracking -->
+                            <div class="analytics-section">
+                                <h4>Real-time Sales Tracking</h4>
+                                <div class="chart-container">
+                                    <canvas id="realtime-sales-chart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer Behavior Analytics -->
+                            <div class="analytics-section">
+                                <h4>Customer Behavior Analytics</h4>
+                                <div class="behavior-grid">
+                                    <div class="behavior-card">
+                                        <h5>Most Visited Products</h5>
+                                        <ul id="most-visited-products">
+                                            <!-- Populated by JavaScript -->
+                                        </ul>
+                                    </div>
+                                    <div class="behavior-card">
+                                        <h5>Shopping Patterns</h5>
+                                        <div class="pattern-stats">
+                                            <div class="pattern-item">
+                                                <span>Avg. Session Duration:</span>
+                                                <span id="avg-session">0 min</span>
+                                            </div>
+                                            <div class="pattern-item">
+                                                <span>Cart Abandonment Rate:</span>
+                                                <span id="cart-abandonment">0%</span>
+                                            </div>
+                                            <div class="pattern-item">
+                                                <span>Repeat Customers:</span>
+                                                <span id="repeat-customers">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Performance Metrics -->
+                            <div class="analytics-section">
+                                <h4>Product Performance Metrics</h4>
+                                <div class="performance-grid">
+                                    <div class="performance-card">
+                                        <h5>Top Selling Products</h5>
+                                        <ul id="top-selling-products">
+                                            <!-- Populated by JavaScript -->
+                                        </ul>
+                                    </div>
+                                    <div class="performance-card">
+                                        <h5>Product Ratings</h5>
+                                        <ul id="product-ratings">
+                                            <!-- Populated by JavaScript -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Geographic Sales Distribution -->
+                            <div class="analytics-section">
+                                <h4>Geographic Sales Distribution</h4>
+                                <div class="geo-container">
+                                    <div class="geo-map-placeholder">
+                                        <p>Geographic sales distribution map would appear here</p>
+                                        <p>(In a production environment, this would integrate with a mapping service)</p>
+                                    </div>
+                                    <div class="geo-stats">
+                                        <h5>Top Regions</h5>
+                                        <ul id="top-regions">
+                                            <!-- Populated by JavaScript -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login/Register Modal -->
+    <aside class="auth-modal" id="auth-modal" aria-hidden="true" aria-labelledby="auth-title" role="dialog">
+        <div class="auth-header">
+            <h2 id="auth-title">Login to Your Account</h2>
+            <button class="close-auth" aria-label="Close" data-close-auth>✕</button>
+        </div>
+        <div class="auth-content">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" aria-selected="true">Login</button>
+                <button class="auth-tab" data-tab="register" aria-selected="false">Register</button>
+            </div>
+            <div class="auth-form-container">
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required aria-required="true">
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-submit">Login</button>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Phone Number</label>
+                        <input type="tel" id="register-phone" name="phone" required aria-required="true">
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <!-- User Profile Section -->
+    <aside class="profile-drawer" id="profile-drawer" aria-hidden="true" aria-labelledby="profile-title" role="dialog">
+        <div class="profile-header">
+            <h2 id="profile-title">My Profile</h2>
+            <button class="close-profile" aria-label="Close" data-close-profile>✕</button>
+        </div>
+        <div class="profile-content">
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="profile" aria-selected="true">Profile</button>
+                <button class="profile-tab" data-tab="orders" aria-selected="false">Order History</button>
+                <button class="profile-tab" data-tab="addresses" aria-selected="false">Addresses</button>
+                <button class="profile-tab" data-tab="wishlist" aria-selected="false">Wishlist</button>
+            </div>
+            <div class="profile-tab-content">
+                <!-- Profile Tab -->
+                <div class="profile-tab-pane active" data-tab-pane="profile">
+                    <div class="profile-info">
+                        <div class="profile-avatar">
+                            <span class="avatar-icon">👤</span>
+                        </div>
+                        <div class="profile-details">
+                            <h3 id="profile-name"></h3>
+                            <p id="profile-email"></p>
+                            <p id="profile-phone"></p>
+                        </div>
+                        <button class="btn btn-outline" id="edit-profile-btn">Edit Profile</button>
+                    </div>
+                </div>
+                
+                <!-- Orders Tab -->
+                <div class="profile-tab-pane" data-tab-pane="orders">
+                    <h3>Order History</h3>
+                    <div class="orders-list" id="orders-list">
+                        <!-- Orders will be populated by JavaScript -->
+                        <p class="empty-message">No orders yet.</p>
+                    </div>
+                </div>
+                
+                <!-- Addresses Tab -->
+                <div class="profile-tab-pane" data-tab-pane="addresses">
+                    <div class="addresses-header">
+                        <h3>Saved Addresses</h3>
+                        <button class="btn btn-primary" id="add-address-btn">Add Address</button>
+                    </div>
+                    <div class="addresses-list" id="addresses-list">
+                        <!-- Addresses will be populated by JavaScript -->
+                        <p class="empty-message">No saved addresses.</p>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Tab -->
+                <div class="profile-tab-pane" data-tab-pane="wishlist">
+                    <h3>My Wishlist</h3>
+                    <div class="wishlist-items" id="wishlist-items">
+                        <!-- Wishlist items will be populated by JavaScript -->
+                        <p class="empty-message">Your wishlist is empty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Add Address Modal -->
+    <aside class="address-modal" id="address-modal" aria-hidden="true" aria-labelledby="address-title" role="dialog">
+        <div class="address-header">
+            <h2 id="address-title">Add New Address</h2>
+            <button class="close-address" aria-label="Close" data-close-address>✕</button>
+        </div>
+        <div class="address-content">
+            <form id="address-form">
+                <div class="form-group">
+                    <label for="address-name">Name</label>
+                    <input type="text" id="address-name" name="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="address-phone">Phone Number</label>
+                    <input type="tel" id="address-phone" name="phone" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="address-street">Street Address</label>
+                    <textarea id="address-street" name="street" rows="2" required aria-required="true"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="address-city">City</label>
+                    <input type="text" id="address-city" name="city" required aria-required="true">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="address-state">State</label>
+                        <input type="text" id="address-state" name="state" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="address-zip">ZIP Code</label>
+                        <input type="text" id="address-zip" name="zip" required aria-required="true">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Address</button>
+            </form>
+        </div>
+    </aside>
+
+    <aside class="cart-drawer" aria-hidden="true" aria-labelledby="cart-title" role="dialog">
+        <div class="cart-header">
+            <h2 id="cart-title">Your basket</h2>
+            <button class="close-cart" aria-label="Close cart" data-close-cart>✕</button>
+        </div>
+        <div class="cart-items" id="cart-items" aria-live="polite"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <strong id="cart-total">$0.00</strong>
+            </div>
+            <button class="btn btn-primary btn-checkout" id="checkout-btn">Checkout</button>
+        </div>
+    </aside>
+
+    <!-- Checkout Section -->
+    <aside class="checkout-drawer" aria-hidden="true" aria-labelledby="checkout-title" role="dialog">
+        <div class="checkout-header">
+            <h2 id="checkout-title">Checkout</h2>
+            <button class="close-checkout" aria-label="Close checkout" data-close-checkout>✕</button>
+        </div>
+        <div class="checkout-progress">
+            <div class="progress-step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Information</span>
+            </div>
+            <div class="progress-step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Shipping</span>
+            </div>
+            <div class="progress-step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Payment</span>
+            </div>
+        </div>
+        <div class="checkout-content">
+            <div class="checkout-step active" data-checkout-step="1">
+                <h3>Customer Information</h3>
+                <form id="customer-info-form" class="checkout-form">
+                    <div class="form-group">
+                        <label for="customer-name">Full Name</label>
+                        <input type="text" id="customer-name" name="customer-name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email</label>
+                        <input type="email" id="customer-email" name="customer-email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number</label>
+                        <input type="tel" id="customer-phone" name="customer-phone" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-address">Address</label>
+                        <textarea id="customer-address" name="customer-address" rows="3" required aria-required="true"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary continue-to-shipping">Continue to Shipping</button>
+                </form>
+            </div>
+            <div class="checkout-step" data-checkout-step="2">
+                <h3>Shipping Method</h3>
+                <div class="shipping-options">
+                    <div class="shipping-option">
+                        <input type="radio" id="shipping-standard" name="shipping" value="standard" checked>
+                        <label for="shipping-standard">
+                            <div class="shipping-details">
+                                <div class="shipping-name">Standard Delivery</div>
+                                <div class="shipping-description">Delivered in 3-5 business days</div>
+                            </div>
+                            <div class="shipping-price">Free</div>
+                        </label>
+                    </div>
+                    <div class="shipping-option">
+                        <input type="radio" id="shipping-express" name="shipping" value="express">
+                        <label for="shipping-express">
+                            <div class="shipping-details">
+                                <div class="shipping-name">Express Delivery</div>
+                                <div class="shipping-description">Delivered in 1-2 business days</div>
+                            </div>
+                            <div class="shipping-price">₹150</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="checkout-actions">
+                    <button type="button" class="btn btn-outline back-to-info">Back</button>
+                    <button type="button" class="btn btn-primary continue-to-payment">Continue to Payment</button>
+                </div>
+            </div>
+            <div class="checkout-step" data-checkout-step="3">
+                <h3>Payment Method</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="payment-cod" name="payment" value="cod" checked>
+                        <label for="payment-cod">
+                            <div class="payment-details">
+                                <div class="payment-name">Cash on Delivery</div>
+                                <div class="payment-description">Pay when you receive your order</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="payment-upi" name="payment" value="upi">
+                        <label for="payment-upi">
+                            <div class="payment-details">
+                                <div class="payment-name">UPI Payment</div>
+                                <div class="payment-description">Pay instantly using UPI</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="order-summary">
+                    <h4>Order Summary</h4>
+                    <div class="summary-items" id="summary-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <strong id="summary-total">₹0</strong>
+                    </div>
+                </div>
+                <div class="payment-instructions" id="payment-instructions" style="display: none; margin-top: 20px; padding: 15px; background: rgba(119, 198, 110, 0.1); border-radius: 8px;">
+                    <h4>Payment Instructions</h4>
+                    <p id="payment-instructions-text"></p>
+                </div>
+                <div class="checkout-actions">
+                    <button type="button" class="btn btn-outline back-to-shipping">Back</button>
+                    <button type="button" class="btn btn-primary complete-order">Complete Order</button>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-success" style="display: none;">
+            <div class="success-icon">✓</div>
+            <h3>Order Confirmed!</h3>
+            <p>Your order has been successfully placed. Thank you for supporting our village producers!</p>
+            <p>Order ID: <strong id="order-id">VM123456</strong></p>
+            <button type="button" class="btn btn-primary continue-shopping">Continue Shopping</button>
+        </div>
+    </aside>
+    <div class="overlay" data-overlay hidden></div>
+    
+    <!-- Community Forum -->
+    <section id="community" class="community section">
+        <div class="container">
+            <h2>Community Forum</h2>
+            <p class="muted">Connect with fellow villagers, farmers, and customers</p>
+            
+            <div class="forum-content">
+                <div class="forum-posts">
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-author">Rajesh Kumar</div>
+                            <div class="post-date">2 hours ago</div>
+                        </div>
+                        <div class="post-content">
+                            <h3>Best practices for organic farming</h3>
+                            <p>I've been using natural compost and crop rotation for the past 3 years. My yields have increased by 40% while maintaining soil health. Would love to hear from other farmers about their experiences!</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn btn-outline">👍 Like (24)</button>
+                            <button class="btn btn-outline">💬 Comment (8)</button>
+                            <button class="btn btn-outline">🔗 Share</button>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-author">Priya Sharma</div>
+                            <div class="post-date">1 day ago</div>
+                        </div>
+                        <div class="post-content">
+                            <h3>New pottery workshop this weekend</h3>
+                            <p>We're hosting a pottery workshop this Saturday at the community center. All skill levels welcome! Materials provided. Please RSVP by Thursday.</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn btn-outline">👍 Like (15)</button>
+                            <button class="btn btn-outline">💬 Comment (5)</button>
+                            <button class="btn btn-outline">🔗 Share</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="forum-sidebar">
+                    <div class="forum-stats">
+                        <h3>Community Stats</h3>
+                        <div class="stat">
+                            <span class="stat-label">Members:</span>
+                            <span class="stat-value">1,248</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Posts:</span>
+                            <span class="stat-value">3,842</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Online Now:</span>
+                            <span class="stat-value">42</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="new-post-btn">Start a Discussion</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- User Generated Content Gallery -->
+    <section id="ugc" class="ugc section">
+        <div class="container">
+            <h2>User Gallery</h2>
+            <p class="muted">Photos from our community members</p>
+            
+            <div class="ugc-gallery">
+                <div class="ugc-item">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop" alt="Fresh vegetables">
+                    <div class="ugc-overlay">
+                        <div class="ugc-info">
+                            <div class="ugc-author">Anjali Mehta</div>
+                            <div class="ugc-caption">Fresh organic vegetables from Village Market</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ugc-item">
+                    <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1000&auto=format&fit=crop" alt="Handmade basket">
+                    <div class="ugc-overlay">
+                        <div class="ugc-info">
+                            <div class="ugc-author">Sunita Devi</div>
+                            <div class="ugc-caption">Beautiful handmade basket for my fruits</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ugc-item">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1000&auto=format&fit=crop" alt="Homemade jam">
+                    <div class="ugc-overlay">
+                        <div class="ugc-info">
+                            <div class="ugc-author">Kavita Rao</div>
+                            <div class="ugc-caption">Delicious strawberry jam on my toast</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ugc-item">
+                    <img src="https://images.unsplash.com/photo-1513104890119-42b9b4c39f70?q=80&w=1000&auto=format&fit=crop" alt="Village surprise box">
+                    <div class="ugc-overlay">
+                        <div class="ugc-info">
+                            <div class="ugc-author">Rahul Verma</div>
+                            <div class="ugc-caption">Monthly surprise box - always a delight!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ugc-actions">
+                <button class="btn btn-primary" id="upload-photo-btn">Upload Your Photo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Panel -->
+    <aside class="comparison-panel" id="comparison-panel" aria-hidden="true">
+        <div class="comparison-header">
+            <h2>Product Comparison</h2>
+            <button class="close-comparison" aria-label="Close comparison">✕</button>
+        </div>
+        <div class="comparison-content">
+            <div class="comparison-table">
+                <!-- Comparison table will be populated by JavaScript -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- Quick View Modal -->
+    <aside class="quick-view-modal" id="quick-view-modal" aria-hidden="true" aria-labelledby="quick-view-title" role="dialog">
+        <div class="quick-view-content">
+            <button class="close-quick-view" aria-label="Close" data-close-quick-view>✕</button>
+            <div class="quick-view-body">
+                <div class="quick-view-image">
+                    <img id="quick-view-img" src="" alt="">
+                </div>
+                <div class="quick-view-details">
+                    <h2 id="quick-view-title"></h2>
+                    <p id="quick-view-description" class="quick-view-desc"></p>
+                    <div class="quick-view-price" id="quick-view-price"></div>
+                    <div class="quick-view-rating">
+                        <div class="stars" id="quick-view-stars"></div>
+                        <span class="rating-count" id="quick-view-reviews"></span>
+                    </div>
+                    <div class="quick-view-stock" id="quick-view-stock"></div>
+                    
+                    <!-- Reviews Section -->
+                    <div class="quick-view-reviews">
+                        <h3>Customer Reviews</h3>
+                        <div id="quick-view-reviews-list"></div>
+                        <button class="btn btn-outline" id="add-review-btn">Add Your Review</button>
+                    </div>
+                    
+                    <!-- Social Sharing -->
+                    <div class="social-share">
+                        <a href="#" class="share-btn whatsapp" data-share="whatsapp">
+                            <span>📱</span> WhatsApp
+                        </a>
+                        <a href="#" class="share-btn facebook" data-share="facebook">
+                            <span>📘</span> Facebook
+                        </a>
+                        <a href="#" class="share-btn twitter" data-share="twitter">
+                            <span>🐦</span> Twitter
+                        </a>
+                    </div>
+                    
+                    <div class="quick-view-actions">
+                        <button class="btn btn-primary add-to-cart" id="quick-view-add">Add to Cart</button>
+                        <button class="btn btn-outline" id="quick-view-wishlist">♡ Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Add Review Modal -->
+    <aside class="add-review-modal" id="add-review-modal" aria-hidden="true" aria-labelledby="add-review-title" role="dialog">
+        <div class="add-review-content">
+            <button class="close-add-review" aria-label="Close" data-close-add-review>✕</button>
+            <div class="add-review-body">
+                <h2 id="add-review-title">Add Your Review</h2>
+                <form id="add-review-form">
+                    <div class="form-group">
+                        <label for="review-name">Your Name</label>
+                        <input type="text" id="review-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rating">Rating</label>
+                        <div class="rating-input">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-comment">Your Review</label>
+                        <textarea id="review-comment" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-photo">Photo (optional)</label>
+                        <input type="file" id="review-photo" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Install Banner for Mobile App -->
+    <div class="install-banner">
+        <div class="install-banner-content">
+            <h4>Install Village Market App</h4>
+            <p>Get the full experience with our mobile app</p>
+        </div>
+        <div class="install-banner-actions">
+            <button class="install-btn">Install</button>
+            <button class="dismiss-btn">Not now</button>
+        </div>
+    </div>
+
+    <!-- Offline Support Banner -->
+    <div class="offline-banner">
+        You are currently offline. Some features may be limited.
+    </div>
+
+    <!-- Push Notification Badge -->
+    <div class="notification-badge">
+        <div class="notification-badge-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <button class="notification-badge-close">&times;</button>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="add-product-modal">
+        <div class="add-product-header">
+            <h3>Add New Product</h3>
+            <button class="close-modal" aria-label="Close">&times;</button>
+        </div>
+        <div class="add-product-content">
+            <form class="add-product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Price (₹)</label>
+                    <input type="number" id="product-price" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" required>
+                            <option value="produce">Produce</option>
+                            <option value="crafts">Crafts</option>
+                            <option value="staples">Staples</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-badge">Badge</label>
+                        <input type="text" id="product-badge" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-stock">Stock</label>
+                        <input type="number" id="product-stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-backorder">Backorder</label>
+                        <select id="product-backorder" required>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Image URL</label>
+                    <input type="url" id="product-image" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© <span id="year"></span> Village Market • Made with ♥ in our village</p>
+            <div class="social">
+                <a href="#" aria-label="Instagram" class="social-link">📷</a>
+                <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+                <a href="#" aria-label="Facebook" class="social-link">📘</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+      // Register service worker for offline functionality
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+</body>
+</html>
